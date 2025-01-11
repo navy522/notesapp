@@ -38,10 +38,25 @@
         android:layout_width="32dp"
         android:layout_height="32dp"/>
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvNoRecord"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="Add Notes to View"
+        android:background="#50C1D0"
+        android:gravity="center"
+        android:textStyle="bold|italic"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivSort"
+        app:layout_constraintBottom_toTopOf="@id/btnAddNote"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvNote"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,6 +70,7 @@
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

@@ -2,6 +2,7 @@ package com.example.notesapp.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -38,7 +39,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         },{position ->
             viewModel.deleteNote(position)
-            adapter.updateNotes(viewModel.fetchAllNotes())
+            val allNotes = viewModel.fetchAllNotes()
+            adapter.updateNotes(allNotes)
+            toggleUIVisibility(allNotes)
         })
 
         binding.rvNote.adapter = adapter
@@ -56,10 +59,19 @@ class MainActivity : AppCompatActivity() {
             if (binding.etSearch.text.trim().toString().isNotEmpty() && binding.etSearch.text.trim().toString() != null){
                 for(i in 0 until GlobalNotes.notesList.size){
                     if (GlobalNotes.notesList[i].contains(binding.etSearch.text.trim().toString())){
-
                     }
                 }
             }
+        }
+    }
+
+    private fun toggleUIVisibility(allNotes: ArrayList<String>) {
+        if (allNotes.size == 0){
+            binding.rvNote.visibility = View.GONE
+            binding.tvNoRecord.visibility = View.VISIBLE
+        }else{
+            binding.rvNote.visibility = View.VISIBLE
+            binding.tvNoRecord.visibility = View.GONE
         }
     }
 
@@ -67,6 +79,8 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
 
 //        re-fetching all notes and updating in the ui
-        adapter.updateNotes(viewModel.fetchAllNotes())
+        val allNotes = viewModel.fetchAllNotes()
+        adapter.updateNotes(allNotes)
+        toggleUIVisibility(allNotes)
     }
 }

@@ -2,4 +2,6 @@
     <string name="app_name">Notes App</string>
     <string name="add_note">Add Note</string>
     <string name="add_update">Add/Update</string>
+    <string name="enter_note_to_search">Enter note to search</string>
+    <string name="search">Search</string>
 </resources>

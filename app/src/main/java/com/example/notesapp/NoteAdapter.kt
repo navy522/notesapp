@@ -7,9 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Recycler
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import kotlin.math.log
 
 class NoteAdapter(
     private val onEditClick: (position: Int) -> Unit,
@@ -54,6 +52,18 @@ class NoteAdapter(
 
        notifyDataSetChanged()
    }
+
+    fun sortNote(sort: Boolean) {
+
+        if (sort){
+            GlobalNotes.notesList.sortDescending()
+            itemList.sortDescending()
+        }else{
+            GlobalNotes.notesList.sort()
+            itemList.sort()
+        }
+        notifyDataSetChanged()
+    }
 }
 
 class MyViewHolder(itemView: View): ViewHolder(itemView) {

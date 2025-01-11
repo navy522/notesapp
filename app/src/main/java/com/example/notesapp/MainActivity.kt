@@ -3,7 +3,7 @@ package com.example.notesapp
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.inputmethod.InputBinding
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: NoteAdapter
     private lateinit var viewModel: NoteViewModel
+    private var sort = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +45,21 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnAddNote.setOnClickListener {
             startActivity(Intent(this, AddEditNoteActivity::class.java))
+        }
+
+        binding.ivSort.setOnClickListener {
+            adapter.sortNote(sort)
+            sort = !sort
+        }
+
+        binding.btnSearch.setOnClickListener {
+            if (binding.etSearch.text.trim().toString().isNotEmpty() && binding.etSearch.text.trim().toString() != null){
+                for(i in 0 until GlobalNotes.notesList.size){
+                    if (GlobalNotes.notesList[i].contains(binding.etSearch.text.trim().toString())){
+
+                    }
+                }
+            }
         }
     }
 

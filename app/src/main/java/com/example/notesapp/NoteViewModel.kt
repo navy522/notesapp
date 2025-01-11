@@ -15,7 +15,8 @@ class NoteViewModel: ViewModel() {
 
     fun updateNote(noteDescription: String, position: String){
         notesList.removeAt(position.toInt())
-        notesList.add(noteDescription)
+        notesList.add(position.toInt(), noteDescription)
+//        notesList.add(noteDescription)
     }
 
     fun deleteNote(position: Int){

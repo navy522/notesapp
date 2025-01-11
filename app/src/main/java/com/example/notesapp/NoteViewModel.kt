@@ -6,6 +6,7 @@ import com.example.notesapp.GlobalNotes.notesList
 class NoteViewModel: ViewModel() {
 
 
+//    test
     fun fetchAllNotes() = GlobalNotes.notesList
 
     fun addNote(noteDescription: String){

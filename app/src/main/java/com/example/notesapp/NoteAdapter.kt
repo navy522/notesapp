@@ -12,7 +12,8 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import kotlin.math.log
 
 class NoteAdapter(
-    private val onEditClick: (position: Int) -> Unit
+    private val onEditClick: (position: Int) -> Unit,
+    private val onDeleteClick: (position: Int) -> Unit
 ): RecyclerView.Adapter<MyViewHolder>() {
 
     var itemList = ArrayList<String>()
@@ -34,6 +35,11 @@ class NoteAdapter(
         holder.ivEdit.setOnClickListener {
             onEditClick(position)
         }
+
+        holder.ivDelete.setOnClickListener {
+            onDeleteClick(position)
+        }
+
     }
 
    fun updateNotes(notesList: ArrayList<String>){
@@ -54,4 +60,5 @@ class MyViewHolder(itemView: View): ViewHolder(itemView) {
 
     val tvNote = itemView.findViewById<TextView>(R.id.tvNote)
     val ivEdit = itemView.findViewById<ImageView>(R.id.ivEdit)
+    val ivDelete = itemView.findViewById<ImageView>(R.id.ivDelete)
 }

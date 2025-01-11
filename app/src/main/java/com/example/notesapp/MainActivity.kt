@@ -30,13 +30,16 @@ class MainActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
 
-        adapter = NoteAdapter { position->
+        adapter = NoteAdapter({ position->
             Log.d("MainActivityz", position.toString())
 
             val intent = Intent(this, AddEditNoteActivity::class.java)
             intent.putExtra("KEY_NOTE", position.toString())
             startActivity(intent)
-        }
+        },{position ->
+            viewModel.deleteNote(position)
+            adapter.updateNotes(viewModel.fetchAllNotes())
+        })
         binding.rvNote.adapter = adapter
 
         binding.btnAddNote.setOnClickListener {

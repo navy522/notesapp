@@ -17,4 +17,9 @@ class NoteViewModel: ViewModel() {
         notesList.add(noteDescription)
     }
 
+    fun deleteNote(position: Int){
+        notesList.removeAt(position)
+    }
+
+
 }

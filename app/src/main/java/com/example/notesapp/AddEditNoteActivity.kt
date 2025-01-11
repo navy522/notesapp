@@ -12,6 +12,7 @@ class AddEditNoteActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddEditNoteBinding
     private lateinit var viewModel: NoteViewModel
+    var notePosition: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,17 +26,24 @@ class AddEditNoteActivity : AppCompatActivity() {
         }
 
         viewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
-        val note = intent.getStringExtra("KEY_NOTE")
+        notePosition = intent.getStringExtra("KEY_NOTE")
 
 
-        if (note.toString().trim().isNotEmpty()){
-            binding.etNote.setText(note)
+        if (notePosition.toString().trim().isNotEmpty() && notePosition != null){
+                binding.etNote.setText(GlobalNotes.notesList[notePosition!!.toInt()])
         }
 
 
 
         binding.btnAddNote.setOnClickListener {
-            if (binding.etNote.text.trim().isNotEmpty()){
+
+            if (binding.etNote.text.trim().isNotEmpty() && notePosition.toString().trim().isNotEmpty() && notePosition != null){
+                viewModel.updateNote(binding.etNote.text.trim().toString(), notePosition!!)
+
+                finish()
+            }
+
+            else if (binding.etNote.text.trim().isNotEmpty()){
                 viewModel.addNote(binding.etNote.text.trim().toString())
 
                 finish()

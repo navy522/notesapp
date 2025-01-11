@@ -12,4 +12,9 @@ class NoteViewModel: ViewModel() {
         notesList.add(noteDescription)
     }
 
+    fun updateNote(noteDescription: String, position: String){
+        notesList.removeAt(position.toInt())
+        notesList.add(noteDescription)
+    }
+
 }

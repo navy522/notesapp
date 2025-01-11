@@ -1,14 +1,19 @@
 package com.example.notesapp
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Recycler
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import kotlin.math.log
 
-class NoteAdapter(): RecyclerView.Adapter<MyViewHolder>() {
+class NoteAdapter(
+    private val onEditClick: (position: Int) -> Unit
+): RecyclerView.Adapter<MyViewHolder>() {
 
     var itemList = ArrayList<String>()
 
@@ -20,16 +25,33 @@ class NoteAdapter(): RecyclerView.Adapter<MyViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return 5
+        return itemList.size
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-//        holder.tvNote.text = itemList[position]
-        holder.tvNote.text = "Data $position"
+        holder.tvNote.text = itemList[position]
+
+        holder.ivEdit.setOnClickListener {
+            onEditClick(position)
+        }
     }
+
+   fun updateNotes(notesList: ArrayList<String>){
+
+       Log.d("Adapterz", notesList.size.toString())
+
+       itemList.clear()
+
+       notesList.forEach {
+           itemList.add(it)
+       }
+
+       notifyDataSetChanged()
+   }
 }
 
 class MyViewHolder(itemView: View): ViewHolder(itemView) {
 
     val tvNote = itemView.findViewById<TextView>(R.id.tvNote)
+    val ivEdit = itemView.findViewById<ImageView>(R.id.ivEdit)
 }

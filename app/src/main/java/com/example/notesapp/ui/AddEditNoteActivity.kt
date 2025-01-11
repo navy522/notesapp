@@ -1,4 +1,4 @@
-package com.example.notesapp
+package com.example.notesapp.ui
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
@@ -6,13 +6,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
+import com.example.notesapp.utils.GlobalNotes
+import com.example.notesapp.viewmodel.NoteViewModel
+import com.example.notesapp.R
 import com.example.notesapp.databinding.ActivityAddEditNoteBinding
 
 class AddEditNoteActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddEditNoteBinding
     private lateinit var viewModel: NoteViewModel
-    var notePosition: String? = ""
+    private var notePosition: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,19 +36,14 @@ class AddEditNoteActivity : AppCompatActivity() {
                 binding.etNote.setText(GlobalNotes.notesList[notePosition!!.toInt()])
         }
 
-
-
         binding.btnAddNote.setOnClickListener {
-
             if (binding.etNote.text.trim().isNotEmpty() && notePosition.toString().trim().isNotEmpty() && notePosition != null){
                 viewModel.updateNote(binding.etNote.text.trim().toString(), notePosition!!)
-
                 finish()
             }
 
             else if (binding.etNote.text.trim().isNotEmpty()){
                 viewModel.addNote(binding.etNote.text.trim().toString())
-
                 finish()
             }
         }

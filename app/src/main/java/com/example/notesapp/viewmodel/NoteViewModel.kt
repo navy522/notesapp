@@ -1,12 +1,11 @@
-package com.example.notesapp
+package com.example.notesapp.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.example.notesapp.GlobalNotes.notesList
+import com.example.notesapp.utils.GlobalNotes
+import com.example.notesapp.utils.GlobalNotes.notesList
 
 class NoteViewModel: ViewModel() {
 
-
-//    test
     fun fetchAllNotes() = GlobalNotes.notesList
 
     fun addNote(noteDescription: String){
@@ -16,12 +15,11 @@ class NoteViewModel: ViewModel() {
     fun updateNote(noteDescription: String, position: String){
         notesList.removeAt(position.toInt())
         notesList.add(position.toInt(), noteDescription)
-//        notesList.add(noteDescription)
     }
 
+//    delete single note
     fun deleteNote(position: Int){
         notesList.removeAt(position)
     }
-
 
 }

@@ -1,14 +1,15 @@
-package com.example.notesapp
+package com.example.notesapp.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
+import com.example.notesapp.utils.GlobalNotes
+import com.example.notesapp.viewmodel.NoteViewModel
+import com.example.notesapp.R
 import com.example.notesapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -32,8 +33,6 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
 
         adapter = NoteAdapter({ position->
-            Log.d("MainActivityz", position.toString())
-
             val intent = Intent(this, AddEditNoteActivity::class.java)
             intent.putExtra("KEY_NOTE", position.toString())
             startActivity(intent)
@@ -41,6 +40,7 @@ class MainActivity : AppCompatActivity() {
             viewModel.deleteNote(position)
             adapter.updateNotes(viewModel.fetchAllNotes())
         })
+
         binding.rvNote.adapter = adapter
 
         binding.btnAddNote.setOnClickListener {
@@ -66,6 +66,7 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
+//        re-fetching all notes and updating in the ui
         adapter.updateNotes(viewModel.fetchAllNotes())
     }
 }

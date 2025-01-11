@@ -1,4 +1,4 @@
-package com.example.notesapp
+package com.example.notesapp.ui
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,6 +8,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.example.notesapp.R
+import com.example.notesapp.utils.GlobalNotes
 
 class NoteAdapter(
     private val onEditClick: (position: Int) -> Unit,
@@ -41,9 +43,6 @@ class NoteAdapter(
     }
 
    fun updateNotes(notesList: ArrayList<String>){
-
-       Log.d("Adapterz", notesList.size.toString())
-
        itemList.clear()
 
        notesList.forEach {
